@@ -39,5 +39,10 @@
 (define m_3 (make-mobile m_2 m_1))
 
 ;c. Write predicate balanced
+(define (torque branch)
+  (* (branch-length branch)(branch-structure branch)))
+
+(define (balanced mobile)
+  (= (torque (left-branch mobile))(torque (right-branch mobile))))
 
  
