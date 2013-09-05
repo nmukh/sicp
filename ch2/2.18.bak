@@ -1,0 +1,4 @@
+(define (rev2 lat)
+  (if (null? lat)
+      '()
+  (append (rev2 (cdr lat))(list(car lat)))))
