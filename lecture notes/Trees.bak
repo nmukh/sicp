@@ -1,0 +1,16 @@
+;General operations on trees
+(define (leaf? x)
+  (not (pair? x)))
+
+(define(tree-manip leaf-op init merge tree)
+  (if (null? tree)
+      init
+      (if (leaf? tree)
+          (leaf-op tree)
+          (merge (tree-manip leaf-op init merge (car tree))
+                 (tree-manip leaf-op init merge (cdr tree))))))
+
+;Examples
+(tree-manip (lambda(x)(* x x)) '() cons '(1(2 (3 4) 5) 6)) ;square leaves
+(tree-manip (lambda(x)1) 0 + '(1(2 (3 4) 5) 6)) ;count leaves
+(tree-manip (lambda(x)x) '() (lambda(a b)(append b (list a)))'(1(2 (3 4) 5) 6)) ;deep reverse
